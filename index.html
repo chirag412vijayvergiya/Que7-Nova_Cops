@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="both">
+      <div class="container Login">
+        <h2>Login</h2>
+        <form id="loginForm">
+          <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required />
+          </div>
+          <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required />
+          </div>
+          <button type="submit">Login</button>
+        </form>
+        <div id="messagelogin"></div>
+      </div>
+
+      <!-- <div class="container signup">
+        <h2>signup</h2>
+        <form id="signupForm">
+          <div class="form-group">
+            <label for="usernamei">Username:</label>
+            <input type="text" id="usernamei" name="usernamei" required />
+          </div>
+          <div class="form-group">
+            <label for="emaili">Email:</label>
+            <input type="email" id="emaili" name="email" required />
+          </div>
+          <div class="form-group">
+            <label for="passwordi">Password:</label>
+            <input type="password" id="passwordi" name="passwordi" required />
+          </div>
+          <div class="form-group">
+            <label for="Confirmpasswordi">Confirm Password:</label>
+            <input
+              type="password"
+              id="confirmpasswordi"
+              name="passwordi"
+              required
+            />
+          </div>
+          <button type="submit">Login</button>
+        </form>
+        <div id="message"></div>
+      </div> -->
+      <div class="container signup">
+        <h2>Signup</h2>
+        <form id="signupForm">
+          <div class="form-group">
+            <label for="usernamei">Username:</label>
+            <input type="text" id="usernamei" name="usernamei" required />
+          </div>
+          <div class="form-group">
+            <label for="emaili">Email:</label>
+            <input type="email" id="emaili" name="emaili" required />
+          </div>
+          <div class="form-group">
+            <label for="passwordi">Password:</label>
+            <input type="password" id="passwordi" name="passwordi" required />
+          </div>
+          <div class="form-group">
+            <label for="confirmpasswordi">Confirm Password:</label>
+            <input
+              type="password"
+              id="confirmpasswordi"
+              name="confirmpasswordi"
+              required
+            />
+          </div>
+          <button type="submit">Signup</button>
+        </form>
+        <div id="messagesignup"></div>
+      </div>
+    </div>
+    <script>
+      document
+        .getElementById('loginForm')
+        .addEventListener('submit', function (event) {
+          event.preventDefault();
+          const email = document.getElementById('username').value;
+          const password = document.getElementById('password').value;
+
+          fetch('http://127.0.0.1:8000/api/v1/users/login', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email, password }),
+          })
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error('Login failed');
+              }
+              return response.json();
+            })
+            .then((data) => {
+              if (data.status === 'success') {
+                // Store the token in localStorage
+                localStorage.setItem('token', data.token);
+                // Redirect to dashboard or perform other actions
+                document.getElementById('messagelogin').textContent =
+                  `Hello, ${email}, ${password}`;
+                console.log('Hello, ', email, password);
+                //  window.location.href = '/dashboard.html';
+              } else {
+                // Handle other status scenarios if needed
+                throw new Error('Login failed: ' + data.message);
+              }
+            })
+            .catch((error) => {
+              console.error('Login error:', error);
+              document.getElementById('messagelogin').textContent =
+                'Login failed. Please check your credentials.';
+            });
+        });
+      document
+        .getElementById('signupForm')
+        .addEventListener('submit', function (event) {
+          event.preventDefault();
+          const name = document.getElementById('usernamei').value;
+          const email = document.getElementById('emaili').value;
+          const password = document.getElementById('passwordi').value;
+          const passwordConfirm =
+            document.getElementById('confirmpasswordi').value;
+
+          document.getElementById('usernamei').value = '';
+          fetch('http://127.0.0.1:8000/api/v1/users/signup', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ name, email, password, passwordConfirm }),
+          })
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error('Signup failed');
+              }
+              return response.json();
+            })
+            .then((data) => {
+              if (data.status === 'success') {
+                // Store the token in localStorage
+                localStorage.setItem('token', data.token);
+                // Redirect to dashboard or perform other actions
+                document.getElementById('messagesignup').textContent =
+                  `Hello,${name}, ${email}, ${password}`;
+                console.log('Hello, ', email, password);
+                //  window.location.href = '/dashboard.html';
+              } else {
+                // Handle other status scenarios if needed
+                throw new Error('Signup failed: ' + data.message);
+              }
+            })
+            .catch((error) => {
+              console.error('Sign up error:', error.message);
+              document.getElementById('messagesignup').textContent =
+                `Your Account Exists!`;
+            });
+        });
+    </script>
+  </body>
+</html>
