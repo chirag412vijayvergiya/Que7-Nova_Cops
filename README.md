@@ -23,4 +23,13 @@ This project is a secure web application developed to provide basic functionalit
 - Educate users about security best practices, such as using strong passwords and being cautious of phishing attempts.
 - Monitor logs and implement intrusion detection systems to detect and respond to security incidents.
 
+**Firstly When I Not use Signup functionality then MongDB :-**
+<img width="1440" alt="Screenshot 2024-02-25 at 7 24 30 PM" src="https://github.com/chirag412vijayvergiya/Que7-Nova_Cops/assets/111374446/5ffbea90-ec91-4a6c-8ff6-6e0545aea26a">
 
+**After that i used Login Functionalty then resetToken generated, You can see In Application In inspect** :- 
+<img width="1440" alt="Screenshot 2024-02-25 at 7 27 44 PM" src="https://github.com/chirag412vijayvergiya/Que7-Nova_Cops/assets/111374446/f007f92e-370e-47cd-baf9-a54c364188fb">
+
+**After that when i used Signup Functionalty then it gave me Account Exist because account exists in MongoDB** :-
+<img width="1440" alt="Screenshot 2024-02-25 at 7 26 43 PM" src="https://github.com/chirag412vijayvergiya/Que7-Nova_Cops/assets/111374446/d153bcef-b365-41e4-ad14-b810f0694e61">
+**After that when i used Signup Functionalty then accounts is created in mongoDB** :-
+<img width="1440" alt="Screenshot 2024-02-25 at 7 27 54 PM" src="https://github.com/chirag412vijayvergiya/Que7-Nova_Cops/assets/111374446/1f503446-4d6e-41a7-b991-948240fcebc8">
